@@ -9,12 +9,21 @@ public class Contact {
 
     private static final String TAG = "Contact";
 
+    private UUID id;
     private String name;
     private Integer tel;
     private String email;
 
     public Contact() {
 
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {
