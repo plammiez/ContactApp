@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import java.util.List;
 
 /**
  * Created by Waraporn on 8/9/2016.
@@ -24,6 +27,7 @@ public class ContactFragment extends Fragment {
     }
 
     Contact contact;
+    ContactLab contactLab;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,18 +38,19 @@ public class ContactFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_contact,container,false);
+        View v = inflater.inflate(R.layout.fragment_contact_list,container,false);
 
         RecyclerView recycleView = (RecyclerView) v.findViewById(R.id.fragment_contact_recycleview);
         recycleView.setLayoutManager(new GridLayoutManager(getActivity(),3));// 3 is columns
+//        recycleView.setAdapter(new ContactAdapter(contactLab.getContacts()));
 
         return v;
     }
 
-    private class ContactHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ContactHolder(View itemView) {
-            super(itemView);
+    private class ContactHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        ContactHolder(LayoutInflater layoutInflater, ViewGroup viewGroup){
+            super(layoutInflater.inflate(R.layout.list_item_contact, viewGroup, false));
         }
 
         @Override
@@ -53,4 +58,29 @@ public class ContactFragment extends Fragment {
 
         }
     }
+
+    private class ContactAdapter extends RecyclerView.Adapter<ContactHolder> {
+
+        private List<ContactLab> contactList;
+
+        ContactAdapter(List<ContactLab> contacts) {
+            contactList = contacts;
+        }
+
+        @Override
+        public ContactHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return null;
+        }
+
+        @Override
+        public void onBindViewHolder(ContactHolder holder, int position) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return 1;
+        }
+    }
+
 }

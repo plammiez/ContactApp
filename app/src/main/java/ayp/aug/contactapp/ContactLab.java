@@ -3,6 +3,9 @@ package ayp.aug.contactapp;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Waraporn on 8/9/2016.
  */
@@ -24,5 +27,10 @@ public class ContactLab {
 
     private ContactLab(Context context){
         this.context = context;
+    }
+
+    public List<Contact> getContacts(){
+        List<Contact> contacts = new ArrayList<>();
+        return contacts;
     }
 }
