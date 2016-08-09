@@ -18,6 +18,10 @@ public class Contact {
 
     }
 
+    public Contact(UUID uuid) {
+        this.id = uuid;
+    }
+
     public UUID getId() {
         return id;
     }

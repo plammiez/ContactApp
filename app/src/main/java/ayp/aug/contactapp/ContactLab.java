@@ -54,7 +54,17 @@ public class ContactLab {
 
     public Contact getContactById (UUID uuid) {
         ContactCursorWrapper cursor = queryContact(ContactTable.Cols.UUID + " = ?", new String[]{uuid.toString()} );
-        
+
+        try {
+            if(cursor.getCount() == 0) {
+                return null;
+            }
+
+            cursor.moveToFirst();
+            return cursor.getContact();
+        } finally {
+            cursor.close();
+        }
     }
 
     private ContactCursorWrapper queryContact(String whereCause, String[] whereArgs) {
@@ -68,10 +78,23 @@ public class ContactLab {
         return new ContactCursorWrapper(cursor);
     }
 
-
     public List<Contact> getContacts(){
         List<Contact> contacts = new ArrayList<>();
+
+        ContactCursorWrapper cursor = queryContact(null,null);
+
+        try{
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                contacts.add(cursor.getContact());
+
+                cursor.moveToNext();
+            }
+        }finally {
+            cursor.close();
+        }
         return contacts;
+
     }
 
     public void addContact(Contact contact){

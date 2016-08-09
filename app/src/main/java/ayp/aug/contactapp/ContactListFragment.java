@@ -7,10 +7,14 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * Created by Wilailux on 8/9/2016.
@@ -19,6 +23,7 @@ public class ContactListFragment extends Fragment {
 
     private RecyclerView contact_recycle_view;
     public TextView visibleText;
+
 
     @Nullable
     @Override
@@ -34,28 +39,40 @@ public class ContactListFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.contact_list_menu, menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+
+        switch (item.getItemId()) {
             case R.id.menu_item_new_contact:
 
-                Contact crime = new Contact();
-                ContactLab.getInstance(getActivity()).addco(crime);
+                Contact contact = new Contact();
+                ContactLab.getInstance(getActivity()).addContact(contact);
 
-                //support tablet
                 updateUI();
-                callbacks.onCrimeSelected(crime);
+//                callbacks.onCrimeSelected(crime);//TODO : callBacks and onCrimeSelected
 
-                return true;
-
-            case R.id.menu_item_show_subtitle :
-                _subtitleVisible = !_subtitleVisible;
-                getActivity().invalidateOptionsMenu();
-
-                updateSubtitle();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
+
+    public void updateUI() {
+        // TODO : updateUI
+    }
+
+
 }
