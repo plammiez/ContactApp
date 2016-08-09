@@ -37,9 +37,20 @@ public class ContactFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_contact,container,false);
 
         RecyclerView recycleView = (RecyclerView) v.findViewById(R.id.fragment_contact_recycleview);
-
         recycleView.setLayoutManager(new GridLayoutManager(getActivity(),3));// 3 is columns
 
         return v;
+    }
+
+    private class ContactHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        public ContactHolder(View itemView) {
+            super(itemView);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+        }
     }
 }
