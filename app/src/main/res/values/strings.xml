@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ContactApp</string>
+    <string name="contact_title_name">Name</string>
+    <string name="contact_name_hint">Name</string>
+    <string name="contact_title_tel">Tel</string>
+    <string name="contact_tel_hint">Tel</string>
+    <string name="contact_title_email">Email</string>
+    <string name="contact_email_hint">Email</string>
 </resources>
