@@ -36,6 +36,7 @@ public class ContactListFragment extends Fragment {
     private RecyclerView contact_recycle_view;
     public TextView visibleText;
 
+    private ContactAdapter _adapter;
 
     @Nullable
     @Override
@@ -63,14 +64,13 @@ public class ContactListFragment extends Fragment {
             case R.id.menu_item_new_contact:
 
                 Contact contact = new Contact();
-                ContactLab.getInstance(getActivity()).addContact(contact);
+//                ContactLab.getInstance(getActivity()).addContact(contact);
 
                 Intent intent = ContactActivity.newIntent(getActivity(), contact.getId());
                 startActivity(intent);
 
                 updateUI();
 //                callbacks.onCrimeSelected(crime);//TODO : callBacks and onCrimeSelected
-
                 return true;
 
             default:
@@ -85,8 +85,25 @@ public class ContactListFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     public void updateUI() {
         // TODO : updateUI
+
+        ContactLab contactLab = ContactLab.getInstance(getActivity());
+        List<Contact> contacts = contactLab.getContacts();
+
+        if (_adapter == null) {
+            _adapter = new ContactAdapter(this, contacts);
+            contact_recycle_view.setAdapter(_adapter);
+        }else {
+            _adapter.setContact(contactLab.getContacts());
+            _adapter.notifyDataSetChanged();
+        }
     }
 
     private class ContactHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -126,9 +143,11 @@ public class ContactListFragment extends Fragment {
     private class ContactAdapter extends RecyclerView.Adapter<ContactHolder> {
 
         private List<Contact> _contacts;
+        private Fragment _f;
         private int _viewCreatingCount;
 
-        public ContactAdapter(List<Contact> contacts) {
+        public ContactAdapter(Fragment f, List<Contact> contacts) {
+            this._f = f;
             this._contacts = contacts;
         }
 

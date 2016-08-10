@@ -59,6 +59,6 @@ public class Contact {
     }
 
     public String getPhotoFileName() {
-        return "IMG_" + getName().toString() + ".jpg";
+        return "IMG_" + getId().toString() + ".jpg";
     }
 }
