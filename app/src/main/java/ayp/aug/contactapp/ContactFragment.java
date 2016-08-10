@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import java.util.UUID;
  */
 public class ContactFragment extends Fragment {
 
+    private static final String CONTACT_ID = "ContactFragment.CONTACT_ID";
+
     private Contact contact;
 
     private EditText name;
@@ -34,9 +37,10 @@ public class ContactFragment extends Fragment {
     private ImageButton photoButton;
     private Button button_delete;
 
-    public static ContactFragment newInstance() {
+    public static ContactFragment newInstance(UUID contactId) {
         
         Bundle args = new Bundle();
+        args.putSerializable(CONTACT_ID, contactId);
         
         ContactFragment fragment = new ContactFragment();
         fragment.setArguments(args);
@@ -48,6 +52,17 @@ public class ContactFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         ContactLab contactLab = ContactLab.getInstance(getActivity());
+
+        if(getArguments().get(CONTACT_ID) != null) {
+            UUID contactId = (UUID) getArguments().getSerializable(CONTACT_ID);
+            contact = ContactLab.getInstance(getActivity()).getContactById(contactId);
+            Log.d(ContactListFragment.TAG, " contact.getId()=" + contact.getId());
+        }else {//TODO delete later
+            //== null
+            Contact contact = new Contact();
+            contactLab.addContact(contact);
+            this.contact = contact;
+        }
     }
 
     @Nullable
@@ -66,6 +81,7 @@ public class ContactFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 contact.setName(name.toString());
+                updateContact();
             }
 
             @Override
@@ -84,6 +100,7 @@ public class ContactFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 contact.setTel(tel.toString());
+                updateContact();
             }
 
             @Override
@@ -102,6 +119,7 @@ public class ContactFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 contact.setEmail(email.toString());
+                updateContact();
             }
 
             @Override
@@ -116,7 +134,13 @@ public class ContactFragment extends Fragment {
 
         button_delete = (Button) v.findViewById(R.id.button_delete);
 
+        updateContact();
         return v;
+    }
+
+    public void updateContact(){
+        ContactLab.getInstance(getActivity()).updateContact(contact);
+        //callbacks.onCrimeUpdated(crime);
     }
 
 }

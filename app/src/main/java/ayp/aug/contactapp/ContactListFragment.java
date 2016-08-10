@@ -22,6 +22,8 @@ import java.util.List;
  */
 public class ContactListFragment extends Fragment {
 
+    protected static final String TAG = "CONTACT_LIST";
+
     private RecyclerView contact_recycle_view;
     public TextView visibleText;
 

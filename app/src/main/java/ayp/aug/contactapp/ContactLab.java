@@ -103,4 +103,12 @@ public class ContactLab {
 
         database.insert(ContactTable.NAME, null, contentValues);
     }
+
+    public void updateContact(Contact contact){
+        String uuidStr = contact.getId().toString();
+        ContentValues contentValues = getContentValues(contact);
+
+        database.update(ContactTable.NAME, contentValues, ContactTable.Cols.UUID
+                + " = ?", new String[] { uuidStr}); // uuidStr will manage n put in ? position (sql injection)
+    }
 }
