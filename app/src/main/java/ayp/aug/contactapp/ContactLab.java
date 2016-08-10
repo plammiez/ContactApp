@@ -4,8 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 import android.util.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -111,4 +113,14 @@ public class ContactLab {
         database.update(ContactTable.NAME, contentValues, ContactTable.Cols.UUID
                 + " = ?", new String[] { uuidStr}); // uuidStr will manage n put in ? position (sql injection)
     }
+
+    public File getPhotoFile(Contact contact) {
+        File externalFilesDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        if (externalFilesDir == null) {
+            return null;
+        }
+        return  new File(externalFilesDir, contact.getPhotoFileName());
+    }
+
 }
