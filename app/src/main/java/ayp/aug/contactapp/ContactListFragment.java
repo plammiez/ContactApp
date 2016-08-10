@@ -1,21 +1,30 @@
 package ayp.aug.contactapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Wilailux on 8/9/2016.
@@ -80,6 +89,79 @@ public class ContactListFragment extends Fragment {
         // TODO : updateUI
     }
 
+    private class ContactHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        public TextView _nameTextView;
+        public ImageView _photoListView;
+
+        UUID _contactId;
+        Contact _contact;
+        int _position;
+
+        public ContactHolder(View itemView) {
+            super(itemView);
+
+            _nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
+            _photoListView = (ImageView) itemView.findViewById(R.id.contact_photo);
+        }
+
+
+        public void bind(Contact contact,int position) {
+            _position = position;
+            _contact = contact;
+
+            // show image on listFragment page
+            File photoFile = ContactLab.getInstance(getActivity()).getPhotoFile(_contact);
+            Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(), getActivity());
+            _photoListView.setImageBitmap(bitmap);
+        }
+
+
+        @Override
+        public void onClick(View v) {
+
+        }
+    }
+
+    private class ContactAdapter extends RecyclerView.Adapter<ContactHolder> {
+
+        private List<Contact> _contacts;
+        private int _viewCreatingCount;
+
+        public ContactAdapter(List<Contact> contacts) {
+            this._contacts = contacts;
+        }
+
+        protected void setContact(List<Contact> contacts) {
+            _contacts = contacts;
+        }
+
+        @Override
+        public ContactHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+            _viewCreatingCount++;
+            Log.d(TAG, "Create view holder for CrimeList: creating view time = "+ _viewCreatingCount);
+
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            View v = layoutInflater.inflate(R.layout.list_item_contact, parent,false);
+
+            return new ContactHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(ContactHolder holder, int position) {
+
+            Log.d(TAG, "Bind view holder for CrimeList : position = " + position);
+
+            Contact contact = _contacts.get(position);// _crimes คือ ArrayList
+            holder.bind(contact, position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return _contacts.size();
+        }
+    }
 
 
 }
