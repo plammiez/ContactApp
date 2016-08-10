@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -88,6 +89,7 @@ public class ContactListFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -112,10 +114,11 @@ public class ContactListFragment extends Fragment {
         //outState.putBoolean(SUBTITLE_VISIBLE_STATE, _subtitleVisible);
     }
     public void updateUI() {
-        // TODO : updateUI
 
         ContactLab contactLab = ContactLab.getInstance(getActivity());
         List<Contact> contacts = contactLab.getContacts();
+
+        int crimeCount = contactLab.getContacts().size();
 
         if (_adapter == null) {
             _adapter = new ContactAdapter(this, contacts);
@@ -123,6 +126,13 @@ public class ContactListFragment extends Fragment {
         }else {
             _adapter.setContact(contactLab.getContacts());
             _adapter.notifyDataSetChanged();
+        }
+
+        // set visible text
+        if (crimeCount != 0) {
+            visibleText.setVisibility(View.INVISIBLE);
+        } else {
+            visibleText.setVisibility(View.VISIBLE);
         }
     }
 
