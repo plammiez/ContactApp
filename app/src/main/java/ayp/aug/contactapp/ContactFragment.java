@@ -45,7 +45,7 @@ public class ContactFragment extends Fragment {
     public static ContactFragment newInstance(UUID contactId) {
         
         Bundle args = new Bundle();
-        
+        args.putSerializable(CONTACT_ID,contactId);
         ContactFragment fragment = new ContactFragment();
         fragment.setArguments(args);
         return fragment;
@@ -76,6 +76,7 @@ public class ContactFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_contact, container, false);
 
         name = (EditText) v.findViewById(R.id.contact_name);
+        name.setText(contact.getName());
         name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
