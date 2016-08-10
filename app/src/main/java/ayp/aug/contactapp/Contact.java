@@ -1,5 +1,7 @@
 package ayp.aug.contactapp;
 
+import android.util.Log;
+
 import java.util.UUID;
 
 /**
@@ -38,9 +40,6 @@ public class Contact {
         this.name = name;
     }
 
-    public static String getTAG() {
-        return TAG;
-    }
 
     public String getTel() {
         return tel;
@@ -60,5 +59,16 @@ public class Contact {
 
     public String getPhotoFileName() {
         return "IMG_" + getId().toString() + ".jpg";
+    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("UUID=").append(id);
+        builder.append(",Name=").append(name);
+        builder.append(",Tel=").append(tel);
+        builder.append(",Email=").append(email);
+        return builder.toString();
     }
 }

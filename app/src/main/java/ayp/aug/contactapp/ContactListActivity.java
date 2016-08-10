@@ -12,9 +12,10 @@ public class ContactListActivity extends SingleFragmentActivity {
     }
 
 
-    public void onCrimeUpdated(Contact contact) {
+    public void onContactUpdated(Contact contact) {
         // Update List
-        ContactListFragment listFragment = (ContactListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        ContactListFragment listFragment = (ContactListFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_container);
 
         listFragment.updateUI();
     }

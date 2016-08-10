@@ -1,5 +1,6 @@
 package ayp.aug.contactapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -83,7 +84,7 @@ public class ContactFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                contact.setName(name.toString());
+                contact.setName(name.getText().toString());
                 updateContact();
             }
 
@@ -102,7 +103,7 @@ public class ContactFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                contact.setTel(tel.toString());
+                contact.setTel(tel.getText().toString());
                 updateContact();
             }
 
@@ -121,7 +122,7 @@ public class ContactFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                contact.setEmail(email.toString());
+                contact.setEmail(email.getText().toString());
                 updateContact();
             }
 

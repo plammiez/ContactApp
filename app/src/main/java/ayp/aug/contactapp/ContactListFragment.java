@@ -1,5 +1,6 @@
 package ayp.aug.contactapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
@@ -32,9 +33,11 @@ import java.util.UUID;
 public class ContactListFragment extends Fragment {
 
     protected static final String TAG = "CONTACT_LIST";
+    private static final int REQUEST_UPDATED_CONTACT = 1;
 
     private RecyclerView contact_recycle_view;
     public TextView visibleText;
+    private Integer[] contactPos;
 
     private ContactAdapter _adapter;
 
@@ -91,6 +94,23 @@ public class ContactListFragment extends Fragment {
         updateUI();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_UPDATED_CONTACT){
+            if(resultCode == Activity.RESULT_OK) {
+                contactPos = (Integer[]) data.getExtras().get("position");
+                Log.d(TAG, "get crimePos = " + contactPos);
+            }
+            //blah blah
+            Log.d(TAG, "Return from CrimeFragment");
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //outState.putBoolean(SUBTITLE_VISIBLE_STATE, _subtitleVisible);
+    }
     public void updateUI() {
         // TODO : updateUI
 
@@ -111,7 +131,6 @@ public class ContactListFragment extends Fragment {
         public TextView _nameTextView;
         public ImageView _photoListView;
 
-        UUID _contactId;
         Contact _contact;
         int _position;
 
@@ -120,12 +139,18 @@ public class ContactListFragment extends Fragment {
 
             _nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
             _photoListView = (ImageView) itemView.findViewById(R.id.contact_photo);
+
+            itemView.setOnClickListener(this);
         }
 
 
-        public void bind(Contact contact,int position) {
-            _position = position;
+        public void bind(final Contact contact,int position) {
+
             _contact = contact;
+            _position = position;
+            _nameTextView.setText(_contact.getName());
+
+//            ContactLab.getInstance(getActivity()).updateContact(_contact);
 
             // show image on listFragment page
             File photoFile = ContactLab.getInstance(getActivity()).getPhotoFile(_contact);
@@ -136,7 +161,8 @@ public class ContactListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-
+            Intent intent = ContactActivity.newIntent(getActivity(), _contact.getId());
+            startActivityForResult(intent, REQUEST_UPDATED_CONTACT);
         }
     }
 
@@ -147,8 +173,8 @@ public class ContactListFragment extends Fragment {
         private int _viewCreatingCount;
 
         public ContactAdapter(Fragment f, List<Contact> contacts) {
-            this._f = f;
-            this._contacts = contacts;
+            _f = f;
+            _contacts = contacts;
         }
 
         protected void setContact(List<Contact> contacts) {
@@ -172,7 +198,7 @@ public class ContactListFragment extends Fragment {
 
             Log.d(TAG, "Bind view holder for CrimeList : position = " + position);
 
-            Contact contact = _contacts.get(position);// _crimes คือ ArrayList
+            Contact contact = _contacts.get(position);
             holder.bind(contact, position);
         }
 
