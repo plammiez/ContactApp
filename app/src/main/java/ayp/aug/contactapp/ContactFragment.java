@@ -98,6 +98,7 @@ public class ContactFragment extends Fragment {
         });
 
         tel = (EditText) v.findViewById(R.id.contact_tel);
+        tel.setText(contact.getTel());
         tel.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -117,6 +118,7 @@ public class ContactFragment extends Fragment {
         });
 
         email = (EditText) v.findViewById(R.id.contact_email);
+        email.setText(contact.getEmail());
         email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

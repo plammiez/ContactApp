@@ -8,4 +8,5 @@
     <string name="contact_email_hint">Email</string>
     <string name="visible_text">No Contact, add contact please :)</string>
     <string name="new_contact">New Contact</string>
+    <string name="denied_permission_to_call">Call is denined</string>
 </resources>
