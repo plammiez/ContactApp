@@ -1,5 +1,6 @@
 package ayp.aug.contactapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -52,6 +53,9 @@ public class ContactListFragment extends Fragment {
 
                 Contact contact = new Contact();
                 ContactLab.getInstance(getActivity()).addContact(contact);
+
+                Intent intent = ContactActivity.newIntent(getActivity(), contact.getId());
+                startActivity(intent);
 
                 updateUI();
 //                callbacks.onCrimeSelected(crime);//TODO : callBacks and onCrimeSelected

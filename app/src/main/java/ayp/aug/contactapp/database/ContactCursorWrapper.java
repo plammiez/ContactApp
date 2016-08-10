@@ -25,7 +25,7 @@ public class ContactCursorWrapper extends CursorWrapper {
     public Contact getContact() {
         String uuidString = getString(getColumnIndex(ContactTable.Cols.UUID));
         String name = getString(getColumnIndex(ContactTable.Cols.NAME));
-        int tel = getInt(getColumnIndex(ContactTable.Cols.TEL));
+        String tel = getString(getColumnIndex(ContactTable.Cols.TEL));
         String email = getString(getColumnIndex(ContactTable.Cols.EMAIL));
 
         Contact contact = new Contact(UUID.fromString(uuidString));

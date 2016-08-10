@@ -1,5 +1,7 @@
 package ayp.aug.contactapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,11 +18,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Waraporn on 8/9/2016.
  */
 public class ContactFragment extends Fragment {
+
+    private Contact contact;
 
     private EditText name;
     private EditText tel;
@@ -41,6 +46,8 @@ public class ContactFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ContactLab contactLab = ContactLab.getInstance(getActivity());
     }
 
     @Nullable
@@ -58,7 +65,7 @@ public class ContactFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                contact.setName(name.toString());
             }
 
             @Override
@@ -76,7 +83,7 @@ public class ContactFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                contact.setTel(tel.toString());
             }
 
             @Override
@@ -94,7 +101,7 @@ public class ContactFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                contact.setEmail(email.toString());
             }
 
             @Override

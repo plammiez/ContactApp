@@ -35,7 +35,7 @@ public class ContactLab {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ContactTable.Cols.UUID, contact.getId().toString());
         contentValues.put(ContactTable.Cols.NAME, contact.getName());
-        contentValues.put(ContactTable.Cols.TEL, contact.getTel().toString());
+        contentValues.put(ContactTable.Cols.TEL, contact.getTel());
         contentValues.put(ContactTable.Cols.EMAIL, contact.getEmail());
         return contentValues;
     }

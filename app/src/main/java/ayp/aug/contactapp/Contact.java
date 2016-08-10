@@ -11,11 +11,11 @@ public class Contact {
 
     private UUID id;
     private String name;
-    private Integer tel;
+    private String tel;
     private String email;
 
     public Contact() {
-
+        this(UUID.randomUUID());
     }
 
     public Contact(UUID uuid) {
@@ -42,11 +42,11 @@ public class Contact {
         return TAG;
     }
 
-    public Integer getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(Integer tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 
