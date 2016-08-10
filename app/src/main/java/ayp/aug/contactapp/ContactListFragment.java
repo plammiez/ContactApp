@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,6 +42,12 @@ public class ContactListFragment extends Fragment {
     private Integer[] contactPos;
 
     private ContactAdapter _adapter;
+    private Callbacks callbacks;
+
+    public interface Callbacks {
+        void onContactSelected(Contact contact);
+        void onOpenSelectFirst();
+    }
 
     @Nullable
     @Override
@@ -88,7 +95,6 @@ public class ContactListFragment extends Fragment {
 
         setHasOptionsMenu(true);
     }
-
 
     @Override
     public void onResume() {
@@ -141,6 +147,8 @@ public class ContactListFragment extends Fragment {
         public TextView _nameTextView;
         public ImageView _photoListView;
 
+
+
         Contact _contact;
         int _position;
 
@@ -155,7 +163,7 @@ public class ContactListFragment extends Fragment {
 
 
         public void bind(final Contact contact,int position) {
-
+            callbacks = (Callbacks)getActivity();
             _contact = contact;
             _position = position;
             _nameTextView.setText(_contact.getName());
@@ -171,8 +179,7 @@ public class ContactListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = ContactActivity.newIntent(getActivity(), _contact.getId());
-            startActivityForResult(intent, REQUEST_UPDATED_CONTACT);
+            callbacks.onContactSelected(_contact);
         }
     }
 

@@ -1,11 +1,14 @@
 package ayp.aug.contactapp;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
+
+import java.util.List;
 
 /**
  * Created by Wilailux on 8/9/2016.
  */
-public class ContactListActivity extends SingleFragmentActivity {
+public class ContactListActivity extends SingleFragmentActivity implements ContactListFragment.Callbacks{
     @Override
     protected Fragment onCreateFragment() {
         return new ContactListFragment();
@@ -20,4 +23,14 @@ public class ContactListActivity extends SingleFragmentActivity {
         listFragment.updateUI();
     }
 
+    @Override
+    public void onContactSelected(Contact contact) {
+        Intent intent = ContactActivity.newIntent(this, contact.getId());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onOpenSelectFirst() {
+
+    }
 }
