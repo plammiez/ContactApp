@@ -11,13 +11,16 @@ import java.util.UUID;
 public class ContactActivity extends SingleFragmentActivity{
 
     protected static final String CONTACT_ID = "ContactActivity.CONTACT_ID";
+    protected static final String CONTACT_POSITION = "ContactActivity.CONTACT_POS";
 
-    private UUID _contactId;
+//    private UUID _contactId;
 
     @Override
     protected Fragment onCreateFragment() {
-        _contactId = (UUID) getIntent().getSerializableExtra(CONTACT_ID);
-        return ContactFragment.newInstance(_contactId);
+        UUID contactID = (UUID) getIntent().getSerializableExtra(CONTACT_ID);
+//        int position = (int) getIntent().getExtras().get(CONTACT_POSITION);
+        Fragment fragment = ContactFragment.newInstance(contactID);
+        return fragment;
     }
 
     public static Intent newIntent(Context activity, UUID id) {

@@ -106,6 +106,11 @@ public class ContactLab {
         database.insert(ContactTable.NAME, null, contentValues);
     }
 
+    public void deleteContact(UUID uuid) {
+        database.delete(ContactTable.NAME, ContactTable.Cols.UUID
+                + " = ? ", new String[] {uuid.toString() });
+    }
+
     public void updateContact(Contact contact){
         String uuidStr = contact.getId().toString();
         ContentValues contentValues = getContentValues(contact);

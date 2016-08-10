@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,6 +30,7 @@ import java.util.UUID;
 public class ContactFragment extends Fragment {
 
     private static final String CONTACT_ID = "ContactFragment.CONTACT_ID";
+    private static final String DIALOG_DELETE = "ContactFragment.DIALOG_DELETE";
     private static final int REQUEST_CAPTURE_PHOTO = 29800;
     private static final String TAG = "ContactFragment";
 
@@ -158,7 +160,16 @@ public class ContactFragment extends Fragment {
         updatePhotoView();
 
         button_delete = (Button) v.findViewById(R.id.button_delete);
+        button_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                DeleteFragment deleteFragment = DeleteFragment.newInstance(contact.getId());
+                deleteFragment.setTargetFragment(ContactFragment.this, REQUEST_CAPTURE_PHOTO);
 
+                deleteFragment.show(fm, DIALOG_DELETE);
+            }
+        });
         updateContact();
         return v;
     }
