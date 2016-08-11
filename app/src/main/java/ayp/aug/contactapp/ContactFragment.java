@@ -151,6 +151,7 @@ public class ContactFragment extends Fragment {
         boolean canTakePhoto = photoFile != null
                 && captureImageIntent.resolveActivity(packageManager) != null;
 
+
         if (canTakePhoto) {
             Uri uri = Uri.fromFile(photoFile);
             Log.d(TAG, "File output at " + photoFile.getAbsolutePath());
