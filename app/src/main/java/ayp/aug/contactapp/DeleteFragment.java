@@ -56,7 +56,6 @@ public class DeleteFragment extends DialogFragment
         final Contact contact = ContactLab.getInstance(getActivity()).getContactById(uuid);
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_delte, null);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setView(v);
