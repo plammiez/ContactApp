@@ -215,7 +215,6 @@ public class ContactListFragment extends Fragment {
 
         @Override
         public ContactHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
             _viewCreatingCount++;
             Log.d(TAG, "Create view holder for CrimeList: creating view time = "+ _viewCreatingCount);
 
@@ -227,7 +226,6 @@ public class ContactListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ContactHolder holder, int position) {
-
             Log.d(TAG, "Bind view holder for CrimeList : position = " + position);
 
             Contact contact = _contacts.get(position);
