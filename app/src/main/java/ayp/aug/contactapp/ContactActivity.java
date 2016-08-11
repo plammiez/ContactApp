@@ -23,6 +23,7 @@ public class ContactActivity extends SingleFragmentActivity implements ContactFr
     @Override
     protected Fragment onCreateFragment() {
         UUID contactID = (UUID) getIntent().getSerializableExtra(CONTACT_ID);
+//        int position = (int) getIntent().getExtras().get(CONTACT_POSITION);
         Fragment fragment = ContactFragment.newInstance(contactID);
         return fragment;
     }
@@ -39,7 +40,7 @@ public class ContactActivity extends SingleFragmentActivity implements ContactFr
     }
 
     @Override
-    public void onContactDelete() {
-
+    public void onContactDeleted() {
+        finish();
     }
 }

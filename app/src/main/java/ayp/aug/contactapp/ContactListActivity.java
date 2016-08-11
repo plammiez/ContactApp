@@ -44,6 +44,11 @@ public class ContactListActivity extends SingleFragmentActivity
     }
 
     @Override
+    public void onContactDelete() {
+
+    }
+
+    @Override
     public void onContactDeleted() {
         FragmentManager fm = getSupportFragmentManager();
         ContactListFragment listFragment = (ContactListFragment)
