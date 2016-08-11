@@ -61,7 +61,6 @@ public class Contact {
         return "IMG_" + getId().toString() + ".jpg";
     }
 
-
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

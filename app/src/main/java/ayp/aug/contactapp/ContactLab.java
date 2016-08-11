@@ -119,13 +119,12 @@ public class ContactLab {
                 + " = ?", new String[] { uuidStr}); // uuidStr will manage n put in ? position (sql injection)
     }
 
-    public File getPhotoFile(Contact contact) {
-        File externalFilesDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        if (externalFilesDir == null) {
+    public File getPhotoFile(Contact contact){
+        File externalFileDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (externalFileDir == null){
             return null;
         }
-        return  new File(externalFilesDir, contact.getPhotoFileName());
+        return new File(externalFileDir, contact.getPhotoFileName());
     }
 
 }

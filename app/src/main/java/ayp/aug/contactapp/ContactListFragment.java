@@ -177,7 +177,7 @@ public class ContactListFragment extends Fragment {
 
             // show image on listFragment page
             File photoFile = ContactLab.getInstance(getActivity()).getPhotoFile(_contact);
-            Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(), getActivity());
+            Bitmap bitmap = PictureUtils.getScaleBitmap(photoFile.getPath(), getActivity());
             _photoListView.setImageBitmap(bitmap);
         }
 

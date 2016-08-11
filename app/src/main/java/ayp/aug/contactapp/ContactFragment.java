@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,7 +36,7 @@ public class ContactFragment extends Fragment {
     private static final String TAG = "ContactFragment";
 
     private Contact contact;
-    private File photoFile;
+    protected File photoFile;
 
     private EditText name;
     private EditText tel;
@@ -137,12 +138,15 @@ public class ContactFragment extends Fragment {
             }
         });
 
+        PackageManager packageManager = getActivity().getPackageManager();
+
         photoView = (ImageView) v.findViewById(R.id.contact_frame_photo);
 
         photoButton = (ImageButton) v.findViewById(R.id.contact_camera);
+
         //call camera intent
         final Intent captureImageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        PackageManager packageManager = getActivity().getPackageManager();
+        photoFile = ContactLab.getInstance(getActivity()).getPhotoFile(contact);
 
         boolean canTakePhoto = photoFile != null
                 && captureImageIntent.resolveActivity(packageManager) != null;
@@ -161,6 +165,8 @@ public class ContactFragment extends Fragment {
             }
         });
         updatePhotoView();
+        updateContact();
+
 
         button_delete = (Button) v.findViewById(R.id.button_delete);
         button_delete.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +183,13 @@ public class ContactFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CAPTURE_PHOTO) {
+            updatePhotoView();
+        }
+    }
+
     public void updateContact(){
         ContactLab.getInstance(getActivity()).updateContact(contact);
         //callbacks.onCrimeUpdated(crime);
@@ -186,7 +199,7 @@ public class ContactFragment extends Fragment {
         if (photoFile == null || !photoFile.exists()) {
             photoView.setImageDrawable(null);
         } else {
-            Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(), getActivity());
+            Bitmap bitmap = PictureUtils.getScaleBitmap(photoFile.getPath(), getActivity());
             photoView.setImageBitmap(bitmap);
         }
     }
