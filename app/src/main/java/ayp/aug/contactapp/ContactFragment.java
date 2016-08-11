@@ -54,6 +54,26 @@ public class ContactFragment extends Fragment {
         return fragment;
     }
 
+    private Callbacks callbacks;
+
+    //Callback
+    public interface Callbacks {
+        void onContactUpdated(Contact contact);
+        void onContactDelete();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        callbacks = null;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callbacks = (Callbacks) context;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -193,7 +213,7 @@ public class ContactFragment extends Fragment {
 
     public void updateContact(){
         ContactLab.getInstance(getActivity()).updateContact(contact);
-        //callbacks.onCrimeUpdated(crime);
+        callbacks.onContactUpdated(contact);
     }
 
     private void updatePhotoView(){
