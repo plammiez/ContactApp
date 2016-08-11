@@ -43,10 +43,6 @@ public class ContactListActivity extends SingleFragmentActivity
         listFragment.updateUI();
     }
 
-    @Override
-    public void onContactDelete() {
-
-    }
 
     @Override
     public void onContactDeleted() {
