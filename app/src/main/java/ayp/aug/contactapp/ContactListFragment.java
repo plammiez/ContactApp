@@ -89,7 +89,7 @@ public class ContactListFragment extends Fragment {
                 startActivity(intent);
 
                 updateUI();
-//                callbacks.onCrimeSelected(crime);//TODO : callBacks and onCrimeSelected
+                callbacks.onContactSelected(contact);//TODO : callBacks and onCrimeSelected
                 return true;
 
             default:
@@ -184,6 +184,7 @@ public class ContactListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "LONG CLICK");
+            callbacks.onContactSelected(_contact);
             if (hasCallPermission()) {
                 call(_contact);
             }
