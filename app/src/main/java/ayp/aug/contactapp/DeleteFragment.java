@@ -1,6 +1,8 @@
 package ayp.aug.contactapp;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,21 +10,41 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+
 import java.util.UUID;
 
 /**
  * Created by Waraporn on 8/10/2016.
  */
-public class DeleteFragment extends DialogFragment implements DialogInterface.OnClickListener {
+public class DeleteFragment extends DialogFragment
+        implements DialogInterface.OnClickListener {
 
     protected static final String EXTRA_DELETE = "DeleteFragment.EXTRA_DELETE";
 
-    public static DeleteFragment newInstance(UUID contactId){
+    public static DeleteFragment newInstance(UUID contactId) {
         DeleteFragment df = new DeleteFragment();
         Bundle args = new Bundle();
-        args.putSerializable("ARG_DELETE",  contactId);
+        args.putSerializable("ARG_DELETE", contactId);
         df.setArguments(args);
         return df;
+    }
+
+    private Callbacks callbacks;
+
+    public interface Callbacks {
+        void onContactDeleted();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callbacks = (Callbacks) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        callbacks = null;
     }
 
     @NonNull
@@ -30,6 +52,8 @@ public class DeleteFragment extends DialogFragment implements DialogInterface.On
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         final UUID uuid = (UUID) getArguments().getSerializable("ARG_DELETE");
+
+        final Contact contact = ContactLab.getInstance(getActivity()).getContactById(uuid);
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_delte, null);
 
@@ -40,6 +64,7 @@ public class DeleteFragment extends DialogFragment implements DialogInterface.On
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 ContactLab.getInstance(getActivity()).deleteContact(uuid);
+                callbacks.onContactDeleted();
             }
         });
         builder.setNegativeButton(android.R.string.cancel, this);

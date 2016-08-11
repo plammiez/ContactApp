@@ -59,7 +59,6 @@ public class ContactFragment extends Fragment {
     //Callback
     public interface Callbacks {
         void onContactUpdated(Contact contact);
-        void onContactDelete();
     }
 
     @Override
@@ -83,7 +82,7 @@ public class ContactFragment extends Fragment {
         if(getArguments().get(CONTACT_ID) != null) {
             UUID contactId = (UUID) getArguments().getSerializable(CONTACT_ID);
             contact = ContactLab.getInstance(getActivity()).getContactById(contactId);
-            Log.d(ContactListFragment.TAG, " contact.getId()=" + contact.getId());
+//            Log.d(ContactListFragment.TAG, " contact.getId()=" + contact.getId());
         }else {//TODO delete later
             //== null
             Contact contact = new Contact();
@@ -188,7 +187,6 @@ public class ContactFragment extends Fragment {
         updatePhotoView();
         updateContact();
 
-
         button_delete = (Button) v.findViewById(R.id.button_delete);
         button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +194,6 @@ public class ContactFragment extends Fragment {
                 FragmentManager fm = getFragmentManager();
                 DeleteFragment deleteFragment = DeleteFragment.newInstance(contact.getId());
                 deleteFragment.setTargetFragment(ContactFragment.this, REQUEST_CAPTURE_PHOTO);
-
                 deleteFragment.show(fm, DIALOG_DELETE);
             }
         });

@@ -2,39 +2,20 @@ package ayp.aug.contactapp;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Wilailux on 8/9/2016.
  */
-public class ContactListActivity extends SingleFragmentActivity implements ContactListFragment.Callbacks, ContactFragment.Callbacks{
+public class ContactListActivity extends SingleFragmentActivity
+        implements ContactListFragment.Callbacks, ContactFragment.Callbacks, DeleteFragment.Callbacks{
     @Override
     protected Fragment onCreateFragment() {
         return new ContactListFragment();
-    }
-
-    @Override
-    public void onOpenSelectFirst() {
-
-        if (findViewById(R.id.detail_fragment_container) != null) {
-            List<Contact> contactList = ContactLab.getInstance(this).getContacts();
-
-            if (contactList != null && contactList.size() > 0) {
-                //get first item
-                Contact contact = contactList.get(0);
-
-                //two pane
-                Fragment newDetailFragment = ContactFragment.newInstance(contact.getId());
-
-                //replace old fragment with new one
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.detail_fragment_container,newDetailFragment)
-                        .commit();
-            }
-        }
     }
 
     @Override
@@ -52,8 +33,6 @@ public class ContactListActivity extends SingleFragmentActivity implements Conta
                     .beginTransaction()
                     .replace(R.id.detail_fragment_container, newDetailFragment)
                     .commit();
-
-            onOpenSelectFirst();
         }
     }
     @Override
@@ -65,19 +44,17 @@ public class ContactListActivity extends SingleFragmentActivity implements Conta
     }
 
     @Override
-    public void onContactDelete(){
+    public void onContactDeleted() {
+        FragmentManager fm = getSupportFragmentManager();
         ContactListFragment listFragment = (ContactListFragment)
-                getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-
-        ContactFragment detailFragment = (ContactFragment)
-                getSupportFragmentManager().findFragmentById(R.id.detail_fragment_container);
-
+                fm.findFragmentById(R.id.fragment_container);
         listFragment.updateUI();
 
-        //clear
-        getSupportFragmentManager()
-                .beginTransaction()
-                .detach(detailFragment)
+        ContactFragment cf = (ContactFragment)
+                fm.findFragmentById(R.id.detail_fragment_container);
+
+        fm.beginTransaction()
+                .detach(cf)
                 .commit();
     }
 }

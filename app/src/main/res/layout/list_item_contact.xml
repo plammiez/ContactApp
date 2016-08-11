@@ -7,7 +7,7 @@
         android:orientation="vertical"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:weightSum="1">
+        >
 
         <ImageView
             android:id="@+id/contact_photo"
@@ -19,11 +19,13 @@
 
         <TextView
             android:id="@+id/contact_name"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_width="match_parent"
-            android:layout_height="12pt"
+
+            android:layout_width="100dp"
+            android:layout_height="30dp"
             android:text="@string/contact_title_name"
-            android:textSize="8pt"/>
+            android:textSize="8pt"
+            android:gravity="center"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 
