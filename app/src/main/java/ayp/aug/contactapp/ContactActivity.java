@@ -3,13 +3,12 @@ package ayp.aug.contactapp;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import java.util.UUID;
 
-public class ContactActivity extends SingleFragmentActivity implements ContactFragment.Callbacks, DeleteFragment.Callbacks{
+public class ContactActivity extends SingleFragmentActivity implements ContactFragment.Callbacks {
 
     protected static final String CONTACT_ID = "ContactActivity.CONTACT_ID";
     protected static final String CONTACT_POSITION = "ContactActivity.CONTACT_POS";
@@ -17,9 +16,13 @@ public class ContactActivity extends SingleFragmentActivity implements ContactFr
 //    private UUID _contactId;
 
     @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_masterdetail;
+    }
+
+    @Override
     protected Fragment onCreateFragment() {
         UUID contactID = (UUID) getIntent().getSerializableExtra(CONTACT_ID);
-//        int position = (int) getIntent().getExtras().get(CONTACT_POSITION);
         Fragment fragment = ContactFragment.newInstance(contactID);
         return fragment;
     }
@@ -36,7 +39,7 @@ public class ContactActivity extends SingleFragmentActivity implements ContactFr
     }
 
     @Override
-    public void onContactDeleted() {
-        finish();
+    public void onContactDelete() {
+
     }
 }
