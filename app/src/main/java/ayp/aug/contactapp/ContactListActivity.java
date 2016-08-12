@@ -13,7 +13,7 @@ import java.util.UUID;
  */
 public class ContactListActivity extends SingleFragmentActivity
         implements ContactListFragment.Callbacks, ContactFragment.Callbacks, DeleteFragment.Callbacks{
-    
+
     @Override
     protected Fragment onCreateFragment() {
         return new ContactListFragment();
