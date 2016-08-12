@@ -7,7 +7,6 @@ import android.util.Log;
 
 import java.util.List;
 import java.util.UUID;
-
 /**
  * Created by Wilailux on 8/9/2016.
  */

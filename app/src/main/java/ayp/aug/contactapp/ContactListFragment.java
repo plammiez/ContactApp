@@ -51,18 +51,17 @@ public class ContactListFragment extends Fragment {
 
     private ContactAdapter _adapter;
     private Callbacks callbacks;
-    private Contact contact;
 
     public interface Callbacks {
         void onContactSelected(Contact contact);
-        void onOpenSelectFirst();
+//        void onOpenSelectFirst();
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         callbacks = (Callbacks) context;
-        callbacks.onOpenSelectFirst();
+//        callbacks.onOpenSelectFirst();
     }
 
     @Override

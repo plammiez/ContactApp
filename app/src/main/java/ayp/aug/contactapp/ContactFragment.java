@@ -59,7 +59,6 @@ public class ContactFragment extends Fragment {
     //Callback
     public interface Callbacks {
         void onContactUpdated(Contact contact);
-        void onContactDelete();
     }
 
     @Override
