@@ -6,6 +6,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:colorBackground">@color/cream</item>
+        <item name="android:buttonStyle">@style/ContactButton</item>
     </style>
 
+    <style name="ContactButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button</item>
+    </style>
 </resources>

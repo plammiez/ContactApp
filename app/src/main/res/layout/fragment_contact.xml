@@ -16,15 +16,19 @@ android:layout_height="match_parent">
         android:id="@+id/contact_frame_photo"
         android:layout_width="153dp"
         android:layout_height="153dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:scaleType="centerInside"
-        android:background="@android:color/darker_gray"
+        android:background="#ADD8E6"
         android:cropToPadding="true" />
 
     <ImageButton
         android:layout_gravity="center"
         android:id="@+id/contact_camera"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:background="@color/pink"
+        android:layout_marginTop="10dp"
         android:src="@android:drawable/ic_menu_camera"
         />
 
@@ -32,12 +36,16 @@ android:layout_height="match_parent">
 
 <!-- Title -->
 
-<Button
-    android:id="@+id/button_delete"
-    android:text="DELETE CONTACT"
-    android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:layout_gravity="center_horizontal|bottom" />
+    <Button
+        android:id="@+id/button_delete"
+        android:text="DELETE CONTACT"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal|bottom" />
 
 <LinearLayout
     android:orientation="vertical"

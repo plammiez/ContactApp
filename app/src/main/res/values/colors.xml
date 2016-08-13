@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--new color-->
+    <color name="watermelon_pink">#EE3B80</color>
+    <color name="misty_rose">#FBBBB9</color>
+    <color name="pink">#FBBBBB</color>
+    <color name="SteelBlue">#63B8FF</color>
+    <color name="OliveDrab">#C0FF3E</color>
+    <color name="peach">#FFDAB9</color>
+    <color name="shooting_blue">#3090C7</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="mint">#ACFFEF</color>
+    <color name="FloralWhite">#FFFAF0</color>
+    <color name="cream">#FFE87C</color>
 </resources>

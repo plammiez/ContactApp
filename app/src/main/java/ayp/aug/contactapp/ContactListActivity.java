@@ -35,6 +35,12 @@ public class ContactListActivity extends SingleFragmentActivity
                     .commit();
         }
     }
+
+    @Override
+    public void onOpenSelectFirst() {
+
+    }
+
     @Override
     public void onContactUpdated(Contact contact) {
         //Update list

@@ -62,7 +62,6 @@ public class ContactListFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         callbacks = (Callbacks) context;
-        callbacks.onOpenSelectFirst();
     }
 
     @Override

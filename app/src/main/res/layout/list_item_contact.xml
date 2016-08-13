@@ -14,7 +14,7 @@
             android:layout_gravity="center"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/darker_gray"
+            android:background="#ADD8E6"
             android:scaleType="centerInside" />
 
         <TextView
@@ -22,6 +22,7 @@
 
             android:layout_width="100dp"
             android:layout_height="30dp"
+            android:textStyle="bold"
             android:text="@string/contact_title_name"
             android:textSize="8pt"
             android:gravity="center"
