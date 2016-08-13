@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import java.util.UUID;
 
-public class ContactActivity extends SingleFragmentActivity implements ContactFragment.Callbacks {
+public class ContactActivity extends SingleFragmentActivity implements ContactFragment.Callbacks, DeleteFragment.Callbacks {
 
     protected static final String CONTACT_ID = "ContactActivity.CONTACT_ID";
     protected static final String CONTACT_POSITION = "ContactActivity.CONTACT_POS";

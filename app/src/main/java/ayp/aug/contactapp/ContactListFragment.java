@@ -55,15 +55,7 @@ public class ContactListFragment extends Fragment {
 
     public interface Callbacks {
         void onContactSelected(Contact contact);
-    }
-
-    public static ContactListFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        ContactListFragment fragment = new ContactListFragment();
-        fragment.setArguments(args);
-        return fragment;
+        void onOpenSelectFirst();
     }
 
     @Override
@@ -107,12 +99,11 @@ public class ContactListFragment extends Fragment {
                 Contact contact = new Contact();
                 ContactLab.getInstance(getActivity()).addContact(contact);
 
-//                Intent intent = ContactActivity.newIntent(getActivity(), contact.getId());
-//                startActivity(intent);
-                callbacks.onContactSelected(contact);//TODO : callBacks and onCrimeSelected
+                Intent intent = ContactActivity.newIntent(getActivity(), contact.getId());
+                startActivity(intent);
 
                 updateUI();
-
+                callbacks.onContactSelected(contact);
                 return true;
 
             default:
@@ -149,13 +140,12 @@ public class ContactListFragment extends Fragment {
         super.onSaveInstanceState(outState);
         //outState.putBoolean(SUBTITLE_VISIBLE_STATE, _subtitleVisible);
     }
-
     public void updateUI() {
 
         ContactLab contactLab = ContactLab.getInstance(getActivity());
         List<Contact> contacts = contactLab.getContacts();
 
-        int contactCount = contactLab.getContacts().size();
+        int crimeCount = contactLab.getContacts().size();
 
         if (_adapter == null) {
             _adapter = new ContactAdapter(this, contacts);
@@ -166,7 +156,7 @@ public class ContactListFragment extends Fragment {
         }
 
         // set visible text
-        if (contactCount != 0) {
+        if (crimeCount != 0) {
             visibleText.setVisibility(View.INVISIBLE);
         } else {
             visibleText.setVisibility(View.VISIBLE);
@@ -282,8 +272,6 @@ public class ContactListFragment extends Fragment {
 
         startActivity(i);
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode,

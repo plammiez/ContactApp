@@ -7,12 +7,12 @@ import android.util.Log;
 
 import java.util.List;
 import java.util.UUID;
-
 /**
  * Created by Wilailux on 8/9/2016.
  */
 public class ContactListActivity extends SingleFragmentActivity
         implements ContactListFragment.Callbacks, ContactFragment.Callbacks, DeleteFragment.Callbacks{
+
     @Override
     protected Fragment onCreateFragment() {
         return new ContactListFragment();
